@@ -478,7 +478,17 @@
 </section>
   <footer id="contacto">
     AquaCar Wash · Tu coche, como nuevo.
+    
   </footer>
+<script>
+  const fechaInput = document.getElementById("fecha");
 
+  const hoy = new Date();
+  const año = hoy.getFullYear();
+  const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+  const dia = String(hoy.getDate()).padStart(2, "0");
+
+  fechaInput.min = `${año}-${mes}-${dia}`;
+</script>
 </body>
 </html>
