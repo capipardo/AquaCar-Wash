@@ -251,7 +251,231 @@
 
     </div>
   </section>
+<style>
+  .booking {
+    padding: 80px 8%;
+    background: #07111f;
+    color: white;
+  }
 
+  .booking-container {
+    max-width: 950px;
+    margin: auto;
+  }
+
+  .booking-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .booking-header h2 {
+    font-size: 38px;
+    margin-bottom: 12px;
+  }
+
+  .booking-header p {
+    color: #b8c4d1;
+    font-size: 18px;
+  }
+
+  .booking-form {
+    background: white;
+    color: #111;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0,0,0,.25);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group.full {
+    grid-column: 1 / -1;
+  }
+
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 14px;
+    border: 1px solid #d7dde5;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #21a8ff;
+  }
+
+  .booking-button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    background: #21a8ff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .booking-button:hover {
+    background: #008dde;
+  }
+
+  .booking-note {
+    margin-top: 15px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+  }
+
+  @media (max-width: 700px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+      grid-column: auto;
+    }
+
+    .booking-form {
+      padding: 25px 18px;
+    }
+  }
+</style>
+
+
+<section class="booking" id="reservas">
+
+  <div class="booking-container">
+
+    <div class="booking-header">
+      <h2>Reserva tu cita</h2>
+      <p>
+        Elige el servicio, el día y la hora que mejor te venga.
+      </p>
+    </div>
+
+    <form
+      class="booking-form"
+      onsubmit="event.preventDefault(); alert('¡Reserva recibida! Próximamente conectaremos este formulario con el sistema de citas.');"
+    >
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="servicio">Servicio</label>
+
+          <select id="servicio" required>
+            <option value="">Selecciona un servicio</option>
+            <option>Lavado exterior - 10 €</option>
+            <option>Limpieza interior - 15 €</option>
+            <option>Lavado completo - 20 €</option>
+            <option>Limpieza premium - Desde 35 €</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="fecha">Fecha</label>
+          <input type="date" id="fecha" required>
+        </div>
+
+
+        <div class="form-group">
+          <label for="hora">Hora</label>
+
+          <select id="hora" required>
+            <option value="">Selecciona una hora</option>
+            <option>09:00</option>
+            <option>10:00</option>
+            <option>11:00</option>
+            <option>12:00</option>
+            <option>13:00</option>
+            <option>16:00</option>
+            <option>17:00</option>
+            <option>18:00</option>
+            <option>19:00</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            placeholder="Tu nombre"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input
+            type="tel"
+            id="telefono"
+            placeholder="600 000 000"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="matricula">Matrícula</label>
+          <input
+            type="text"
+            id="matricula"
+            placeholder="1234 ABC"
+          >
+        </div>
+
+
+        <div class="form-group full">
+          <label for="observaciones">Observaciones</label>
+
+          <textarea
+            id="observaciones"
+            rows="4"
+            placeholder="Puedes indicarnos cualquier detalle sobre el vehículo o el servicio..."
+          ></textarea>
+        </div>
+
+      </div>
+
+
+      <button type="submit" class="booking-button">
+        Confirmar reserva
+      </button>
+
+      <div class="booking-note">
+        La reserva quedará pendiente de confirmación.
+      </div>
+
+    </form>
+
+  </div>
+
+</section>
   <footer id="contacto">
     AquaCar Wash · Tu coche, como nuevo.
   </footer>
