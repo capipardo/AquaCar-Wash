@@ -404,17 +404,9 @@
           <label for="hora">Hora</label>
 
           <select id="hora" required>
-            <option value="">Selecciona una hora</option>
-            <option>09:00</option>
-            <option>10:00</option>
-            <option>11:00</option>
-            <option>12:00</option>
-            <option>13:00</option>
-            <option>16:00</option>
-            <option>17:00</option>
-            <option>18:00</option>
-            <option>19:00</option>
-          </select>
+           <select id="hora" required>
+  <option value="">Selecciona primero una fecha</option>
+</select>
         </div>
 
 
@@ -489,6 +481,81 @@
   const dia = String(hoy.getDate()).padStart(2, "0");
 
   fechaInput.min = `${año}-${mes}-${dia}`;
+  const horaSelect = document.getElementById("hora");
+
+const horariosSemana = [
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "16:00",
+  "17:00",
+  "18:00",
+  "19:00"
+];
+
+const horariosSabado = [
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00"
+];
+
+fechaInput.addEventListener("change", function () {
+
+  horaSelect.innerHTML = "";
+
+  if (!fechaInput.value) {
+    horaSelect.innerHTML =
+      '<option value="">Selecciona primero una fecha</option>';
+    return;
+  }
+
+  const fechaSeleccionada = new Date(
+    fechaInput.value + "T00:00:00"
+  );
+
+  const diaSemana = fechaSeleccionada.getDay();
+
+  if (diaSemana === 0) {
+    horaSelect.innerHTML =
+      '<option value="">Domingo cerrado</option>';
+
+    horaSelect.disabled = true;
+    return;
+  }
+
+  horaSelect.disabled = false;
+
+  const opcionInicial = document.createElement("option");
+  opcionInicial.value = "";
+  opcionInicial.textContent = "Selecciona una hora";
+
+  horaSelect.appendChild(opcionInicial);
+
+  let horarios;
+
+  if (diaSemana === 6) {
+    horarios = horariosSabado;
+  } else {
+    horarios = horariosSemana;
+  }
+
+  horarios.forEach(function (hora) {
+
+    const opcion = document.createElement("option");
+
+    opcion.value = hora;
+    opcion.textContent = hora;
+
+    horaSelect.appendChild(opcion);
+
+  });
+
+});
 </script>
 </body>
 </html>
