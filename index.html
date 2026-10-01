@@ -472,10 +472,21 @@
     AquaCar Wash · Tu coche, como nuevo.
     
   </footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
   const fechaInput = document.getElementById("fecha");
 
+  const SUPABASE_URL = "https://ztgoxfkqrznwovdcvbpx.supabase.co"
+const SUPABASE_KEY = "sb_publishable_PsN0ws-hKgacX_53sqtwhg_1LzEI0US"
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  
   const hoy = new Date();
+
+ 
   const año = hoy.getFullYear();
   const mes = String(hoy.getMonth() + 1).padStart(2, "0");
   const dia = String(hoy.getDate()).padStart(2, "0");
