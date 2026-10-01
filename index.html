@@ -346,7 +346,28 @@
     color: #6b7280;
     font-size: 14px;
   }
+.mensaje-reserva {
+  display: none;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+}
 
+.mensaje-reserva.exito {
+  display: block;
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+
+.mensaje-reserva.error {
+  display: block;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
   @media (max-width: 700px) {
     .form-grid {
       grid-template-columns: 1fr;
@@ -455,6 +476,7 @@
       <button type="submit" class="booking-button">
         Confirmar reserva
       </button>
+     <div id="mensajeReserva" class="mensaje-reserva"></div>
 
       <div class="booking-note">
         La reserva quedará pendiente de confirmación.
@@ -510,11 +532,18 @@ bookingForm.addEventListener("submit", async function (event) {
 
   if (error) {
     console.error("Error al guardar la reserva:", error);
-    alert("No se ha podido guardar la reserva. Inténtalo de nuevo.");
+const mensajeReserva = document.getElementById("mensajeReserva");
+
+mensajeReserva.className = "mensaje-reserva error";
+mensajeReserva.textContent =
+  "No se ha podido guardar la reserva. Inténtalo de nuevo.";
     return;
   }
 
-  alert("¡Reserva enviada correctamente!");
+const mensajeReserva = document.getElementById("mensajeReserva");
+
+mensajeReserva.className = "mensaje-reserva exito";
+mensajeReserva.textContent = "✓ ¡Reserva enviada correctamente!";
 
   bookingForm.reset();
 
