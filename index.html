@@ -374,10 +374,7 @@
       </p>
     </div>
 
-    <form
-      class="booking-form"
-      onsubmit="event.preventDefault(); alert('¡Reserva recibida! Próximamente conectaremos este formulario con el sistema de citas.');"
-    >
+   <form class="booking-form" id="bookingForm">
 
       <div class="form-grid">
 
@@ -483,7 +480,47 @@
 const SUPABASE_KEY = "sb_publishable_PsN0ws-hKgacX_53sqtwhg_1LzEI0US"
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  
+  const bookingForm = document.getElementById("bookingForm");
+
+bookingForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const servicio = document.getElementById("servicio").value;
+  const fecha = document.getElementById("fecha").value;
+  const hora = document.getElementById("hora").value;
+  const nombre = document.getElementById("nombre").value.trim();
+  const telefono = document.getElementById("telefono").value.trim();
+  const matricula = document.getElementById("matricula").value.trim();
+  const observaciones = document.getElementById("observaciones").value.trim();
+
+  const { error } = await supabaseClient
+    .from("reservas")
+    .insert([
+      {
+        servicio: servicio,
+        fecha: fecha,
+        hora: hora,
+        nombre: nombre,
+        telefono: telefono,
+        matricula: matricula,
+        observaciones: observaciones,
+        estado: "pendiente"
+      }
+    ]);
+
+  if (error) {
+    console.error("Error al guardar la reserva:", error);
+    alert("No se ha podido guardar la reserva. Inténtalo de nuevo.");
+    return;
+  }
+
+  alert("¡Reserva enviada correctamente!");
+
+  bookingForm.reset();
+
+  horaSelect.innerHTML =
+    '<option value="">Selecciona primero una fecha</option>';
+});
   const hoy = new Date();
 
  
